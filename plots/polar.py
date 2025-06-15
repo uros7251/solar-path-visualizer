@@ -92,7 +92,7 @@ def add_compass_points(fig):
     for point, (x, y) in compass_points.items():
         fig.add_annotation(
             x=x, y=y,
-            text=point,
+            text=f'<b>{point}</b>',  # Use HTML bold tags
             showarrow=False,
             font=dict(
                 size=20,
@@ -124,8 +124,8 @@ def create_polar_plot(altitude, azimuth):
         ),
         xaxis=dict(
             range=[-1.2, 1.2],
-            showgrid=True,
-            zeroline=True,
+            showgrid=True,  # Restore rectangular grid
+            zeroline=True,  # Restore zero line
             showticklabels=False,
             scaleanchor='y',
             gridcolor=COLORS['grid'],
@@ -133,8 +133,8 @@ def create_polar_plot(altitude, azimuth):
         ),
         yaxis=dict(
             range=[-1.2, 1.2],
-            showgrid=True,
-            zeroline=True,
+            showgrid=True,  # Restore rectangular grid
+            zeroline=True,  # Restore zero line
             showticklabels=False,
             scaleanchor='x',
             gridcolor=COLORS['grid'],

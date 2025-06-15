@@ -22,6 +22,7 @@ def create_layout():
                         'marginTop': '20px'
                     }),
             
+            # Controls section with uniform width
             html.Div([
                 html.Div([
                     html.Label("Latitude (degrees)", 
@@ -77,52 +78,48 @@ def create_layout():
                                 'fontStyle': 'italic'
                             }),
                 ], style={
-                    'flex': '1',
                     'padding': '20px',
                     'backgroundColor': 'white',
                     'borderRadius': '10px',
                     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
                 }),
-            ], style={'width': '80%', 'margin': '0 auto', 'padding': '20px'}),
+            ], style={
+                'width': '1000px',
+                'margin': '0 auto',
+                'padding': '20px'
+            }),
             
+            # Plots section with uniform width and vertical stacking
             html.Div([
                 html.Div([
                     dcc.Graph(id='time-series-plot'),
                 ], style={
-                    'flex': '1',
-                    'minWidth': '500px',
                     'padding': '10px',
                     'backgroundColor': 'white',
                     'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
+                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
+                    'marginBottom': '20px'
                 }),
                 
                 html.Div([
                     dcc.Graph(id='polar-plot'),
                 ], style={
-                    'flex': '1',
-                    'minWidth': '500px',
                     'padding': '10px',
                     'backgroundColor': 'white',
                     'borderRadius': '10px',
                     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
                 }),
             ], style={
-                'display': 'flex',
-                'flexWrap': 'wrap',
-                'gap': '20px',
-                'justifyContent': 'center',
-                'width': '95%',
-                'margin': '0 auto'
+                'width': '1000px',
+                'margin': '0 auto',
+                'padding': '20px'
             }),
             
-            # Add explanation section
+            # Explanation section with uniform width
             html.Div([
                 html.Div([
                     dcc.Markdown(id='explanation-content', mathjax=True)
                 ], style={
-                    'maxWidth': '800px',
-                    'margin': '0 auto',
                     'padding': '30px',
                     'backgroundColor': 'white',
                     'borderRadius': '10px',
@@ -133,11 +130,12 @@ def create_layout():
                     'lineHeight': '1.6'
                 }),
             ], style={
-                'width': '95%',
+                'width': '1000px',
                 'margin': '0 auto',
                 'marginTop': '40px',
-                'marginBottom': '40px'
-            }),
+                'marginBottom': '40px',
+                'padding': '20px'
+            })
         ], style={
             'backgroundColor': COLORS['background'],
             'minHeight': '100vh',
