@@ -11,5 +11,9 @@ app.layout = create_layout()
 # Register callbacks
 register_callbacks(app)
 
+# Enable hot reloading
+app.config.suppress_callback_exceptions = True
+app.enable_dev_tools(dev_tools_hot_reload=True)
+
 if __name__ == '__main__':
     app.run_server(debug=True) 

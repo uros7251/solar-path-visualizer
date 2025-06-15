@@ -1,3 +1,4 @@
 dash==2.14.2
 plotly==5.18.0
-numpy==1.26.3 
+numpy==1.26.3
+dash-latex==0.1.0 

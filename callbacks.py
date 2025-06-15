@@ -2,6 +2,7 @@ from dash.dependencies import Input, Output
 from sun_calculations import calculate_sun_position
 from plots.time_series import create_time_series_plot
 from plots.polar import create_polar_plot
+from layout import read_markdown_file
 
 def register_callbacks(app):
     @app.callback(
@@ -22,4 +23,11 @@ def register_callbacks(app):
         # Create declination info text
         declination_info = f"Solar declination: {declination:.1f}°"
         
-        return time_series, polar, declination_info 
+        return time_series, polar, declination_info
+
+    @app.callback(
+        Output('explanation-content', 'children'),
+        Input('explanation-content', 'id')
+    )
+    def update_explanation(_):
+        return read_markdown_file() 

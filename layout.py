@@ -1,5 +1,12 @@
 from dash import html, dcc
 from constants import COLORS, DAY_MARKS
+from dash.dependencies import Input, Output
+import os
+
+def read_markdown_file():
+    """Read the markdown content from explanation.md"""
+    with open('explanation.md', 'r', encoding='utf-8') as file:
+        return file.read()
 
 def create_layout():
     """Create the main layout of the application."""
@@ -107,6 +114,29 @@ def create_layout():
                 'justifyContent': 'center',
                 'width': '95%',
                 'margin': '0 auto'
+            }),
+            
+            # Add explanation section
+            html.Div([
+                html.Div([
+                    dcc.Markdown(id='explanation-content', mathjax=True)
+                ], style={
+                    'maxWidth': '800px',
+                    'margin': '0 auto',
+                    'padding': '30px',
+                    'backgroundColor': 'white',
+                    'borderRadius': '10px',
+                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
+                    'fontFamily': 'Roboto, sans-serif',
+                    'fontSize': '16px',
+                    'color': COLORS['text'],
+                    'lineHeight': '1.6'
+                }),
+            ], style={
+                'width': '95%',
+                'margin': '0 auto',
+                'marginTop': '40px',
+                'marginBottom': '40px'
             }),
         ], style={
             'backgroundColor': COLORS['background'],
