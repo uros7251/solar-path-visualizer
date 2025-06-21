@@ -2,25 +2,30 @@ import plotly.graph_objects as go
 import numpy as np
 from constants import COLORS
 
+# Polar plot radius - can be easily changed here
+POLAR_RADIUS = 1
+
 def add_polar_grid(fig):
     """Add grid lines and circles to the polar plot."""
-    # Add circles for altitude reference
-    for r in [0.25, 0.5, 0.75, 1.0]:
+    # Add circles for altitude reference - proportional to radius
+    for r_ratio in [0.25, 0.5, 0.75, 1.0]:
+        r = POLAR_RADIUS * r_ratio
         theta = np.linspace(0, 2*np.pi, 100)
         fig.add_trace(go.Scatter(
             x=r * np.cos(theta),
             y=r * np.sin(theta),
             mode='lines',
             line=dict(color=COLORS['grid'], width=1, dash='dot'),
-            showlegend=False
+            showlegend=False,
+            hoverinfo='skip'
         ))
     
-    # Add radial grid lines at 30-degree intervals
+    # Add radial grid lines at 30-degree intervals, extended to match largest circle
     for angle in np.arange(0, 360, 30):
         phi = np.radians(angle)
         fig.add_trace(go.Scatter(
-            x=[0, np.sin(phi)],
-            y=[0, np.cos(phi)],
+            x=[0, POLAR_RADIUS * np.sin(phi)],
+            y=[0, POLAR_RADIUS * np.cos(phi)],
             mode='lines',
             line=dict(color=COLORS['grid'], width=1, dash='dot'),
             showlegend=False,
@@ -29,44 +34,47 @@ def add_polar_grid(fig):
 
 def add_sun_path(fig, altitude, azimuth):
     """Add the sun path and sunrise/sunset points to the polar plot."""
-    # Calculate polar coordinates for ground projection
-    r = np.cos(np.radians(altitude))
-    phi = np.radians(azimuth)
-    
-    # Filter for positive altitude
+    # Filter for positive altitude (above horizon)
     mask = altitude > 0
-    r = r[mask]
-    phi = phi[mask]
+    altitude_visible = altitude[mask]
+    azimuth_visible = azimuth[mask]
     
-    # Find sunrise and sunset points
+    if len(altitude_visible) > 0:
+        # Calculate polar coordinates: r = R * cos(altitude) where R is the radius of polar plot
+        r = POLAR_RADIUS * np.cos(np.radians(altitude_visible))
+        phi = np.radians(azimuth_visible)
+        
+        # Add sun path
+        fig.add_trace(go.Scatter(
+            x=r * np.sin(phi),
+            y=r * np.cos(phi),
+            mode='lines',
+            name='Sun Path',
+            line=dict(color=COLORS['sun_path'], width=4),
+            showlegend=True
+        ))
+    
+    # Find sunrise and sunset points (where altitude crosses zero)
     zero_crossings = np.where(np.diff(np.signbit(altitude)))[0]
     sunrise_sunset_azimuth = azimuth[zero_crossings]
     sunrise_sunset_phi = np.radians(sunrise_sunset_azimuth)
     
-    # Add polar projection trace
-    fig.add_trace(go.Scatter(
-        x=r * np.sin(phi),
-        y=r * np.cos(phi),
-        mode='lines',
-        name='Sun Path',
-        line=dict(color=COLORS['sun_path'], width=3)
-    ))
-    
-    # Add sunrise/sunset points
+    # Add sunrise/sunset points at the circumference (r = POLAR_RADIUS)
     if len(sunrise_sunset_azimuth) > 0:
         fig.add_trace(go.Scatter(
-            x=np.sin(sunrise_sunset_phi),
-            y=np.cos(sunrise_sunset_phi),
+            x=POLAR_RADIUS * np.sin(sunrise_sunset_phi),
+            y=POLAR_RADIUS * np.cos(sunrise_sunset_phi),
             mode='markers',
             name='Horizon Crossing',
             marker=dict(color=COLORS['sunrise_sunset'], size=12),
             showlegend=False
         ))
         
-        # Add azimuth labels
+        # Add azimuth labels - positioned further out
+        label_radius = POLAR_RADIUS * 1.2  # 20% beyond the circumference
         for phi, az in zip(sunrise_sunset_phi, sunrise_sunset_azimuth):
-            x = 1.2 * np.sin(phi)
-            y = 1.2 * np.cos(phi)
+            x = label_radius * np.sin(phi)
+            y = label_radius * np.cos(phi)
             fig.add_annotation(
                 x=x, y=y,
                 text=f'{az:.1f}°',
@@ -82,11 +90,13 @@ def add_sun_path(fig, altitude, azimuth):
 
 def add_compass_points(fig):
     """Add compass points (N, E, S, W) to the polar plot."""
+    # Position compass points outside the circle
+    compass_radius = POLAR_RADIUS * 1.1  # 10% beyond the circumference
     compass_points = {
-        'N': (0, 1.1),
-        'E': (1.1, 0),
-        'S': (0, -1.1),
-        'W': (-1.1, 0)
+        'N': (0, compass_radius),
+        'E': (compass_radius, 0),
+        'S': (0, -compass_radius),
+        'W': (-compass_radius, 0)
     }
     
     for point, (x, y) in compass_points.items():
@@ -112,6 +122,9 @@ def create_polar_plot(altitude, azimuth):
     add_sun_path(fig, altitude, azimuth)
     add_compass_points(fig)
     
+    # Calculate plot range to accommodate compass points and labels
+    plot_range = POLAR_RADIUS * 1.3  # 30% beyond radius to include compass points and labels
+    
     # Update layout
     fig.update_layout(
         title=dict(
@@ -123,22 +136,18 @@ def create_polar_plot(altitude, azimuth):
             )
         ),
         xaxis=dict(
-            range=[-1.2, 1.2],
-            showgrid=True,  # Restore rectangular grid
-            zeroline=True,  # Restore zero line
+            range=[-plot_range, plot_range],
+            showgrid=False,  # Disable rectangular grid to avoid conflicts
+            zeroline=False,  # Disable zero line to avoid conflicts
             showticklabels=False,
-            scaleanchor='y',
-            gridcolor=COLORS['grid'],
-            zerolinecolor=COLORS['grid']
+            scaleanchor='y'
         ),
         yaxis=dict(
-            range=[-1.2, 1.2],
-            showgrid=True,  # Restore rectangular grid
-            zeroline=True,  # Restore zero line
+            range=[-plot_range, plot_range],
+            showgrid=False,  # Disable rectangular grid to avoid conflicts
+            zeroline=False,  # Disable zero line to avoid conflicts
             showticklabels=False,
-            scaleanchor='x',
-            gridcolor=COLORS['grid'],
-            zerolinecolor=COLORS['grid']
+            scaleanchor='x'
         ),
         showlegend=True,
         hovermode='closest',

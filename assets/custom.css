@@ -47,6 +47,8 @@
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
+    background-color: #F8F9FA;
+    min-height: 100vh;
 }
 
 .content-section {
@@ -55,6 +57,141 @@
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/* Typography */
+.app-title {
+    text-align: center;
+    color: #2C3E50;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.section-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #2C3E50;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Location button */
+.location-button {
+    background-color: #3498DB;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.location-status {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #2C3E50;
+    text-align: center;
+    font-style: italic;
+    white-space: pre-line;
+}
+
+/* Control sections */
+.control-section {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.control-section:last-child {
+    margin-bottom: 0;
+}
+
+.control-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.declination-info {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #2C3E50;
+    margin-top: 10px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Plot sections */
+.plot-container {
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.plot-container:last-child {
+    margin-bottom: 0;
+}
+
+/* Explanation section */
+.explanation-container {
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #2C3E50;
+    line-height: 1.6;
+}
+
+.explanation-section {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Location detection section */
+.location-section {
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Plotly graph responsive fixes */
+.js-plotly-plot {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Force Plotly graphs to be responsive */
+.dash-graph .js-plotly-plot {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Ensure graph containers maintain aspect ratio */
+.plot-container .dash-graph {
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 400px;
+}
+
+/* Improve slider responsiveness */
+.rc-slider {
+    width: 100% !important;
 }
 
 /* Media queries for responsive design */
@@ -81,12 +218,12 @@
     }
     
     /* Adjust text sizes for mobile */
-    h1 {
+    .app-title {
         font-size: 24px !important;
         margin-bottom: 20px !important;
     }
     
-    h3 {
+    .section-title {
         font-size: 16px !important;
     }
     
@@ -98,14 +235,15 @@
     }
     
     /* Adjust button padding for mobile */
-    #location-button {
+    .location-button {
         padding: 15px 20px !important;
         font-size: 14px !important;
     }
     
     /* Improve graph responsiveness on mobile */
-    .dash-graph {
+    .plot-container .dash-graph {
         height: 300px !important;
+        min-height: 250px;
     }
     
     /* Adjust padding for mobile */
@@ -123,7 +261,7 @@
         padding: 5px;
     }
     
-    h1 {
+    .app-title {
         font-size: 20px !important;
         margin-bottom: 15px !important;
     }
@@ -134,8 +272,9 @@
     }
     
     /* Further reduce graph height on very small screens */
-    .dash-graph {
+    .plot-container .dash-graph {
         height: 250px !important;
+        min-height: 200px;
     }
     
     /* Reduce padding on very small screens */
@@ -149,15 +288,4 @@
         height: 24px !important;
         margin-top: -10px !important;
     }
-}
-
-/* Ensure graphs are responsive */
-.js-plotly-plot {
-    width: 100% !important;
-    height: auto !important;
-}
-
-/* Improve slider responsiveness */
-.rc-slider {
-    width: 100% !important;
 } 

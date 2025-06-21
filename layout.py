@@ -1,5 +1,5 @@
 from dash import html, dcc
-from constants import COLORS, DAY_MARKS
+from constants import DAY_MARKS
 from dash.dependencies import Input, Output
 import os
 
@@ -12,78 +12,31 @@ def create_layout():
     """Create the main layout of the application."""
     return html.Div([
         html.Div([
-            html.H1("Sun Movement Visualization", 
-                    style={
-                        'textAlign': 'center',
-                        'color': COLORS['text'],
-                        'fontFamily': 'Roboto, sans-serif',
-                        'fontWeight': '300',
-                        'marginBottom': '30px',
-                        'marginTop': '20px'
-                    }),
+            html.H1("Sun Movement Visualization", className='app-title'),
             
             # Location detection section
             html.Div([
                 html.Div([
-                    html.H3("📍 Get My Location", 
-                            style={
-                                'fontFamily': 'Roboto, sans-serif',
-                                'fontSize': '18px',
-                                'color': COLORS['text'],
-                                'marginBottom': '15px',
-                                'textAlign': 'center'
-                            }),
+                    html.H3("📍 Get My Location", className='section-title'),
                     html.Button(
                         "Get Current Date & Location Info",
                         id='location-button',
-                        style={
-                            'backgroundColor': COLORS['primary'],
-                            'color': 'white',
-                            'border': 'none',
-                            'padding': '12px 24px',
-                            'borderRadius': '8px',
-                            'fontFamily': 'Roboto, sans-serif',
-                            'fontSize': '16px',
-                            'cursor': 'pointer',
-                            'width': '100%',
-                            'marginBottom': '15px',
-                            'transition': 'all 0.3s ease'
-                        }
+                        className='location-button'
                     ),
                     html.Div(
                         id='location-status',
-                        style={
-                            'fontFamily': 'Roboto, sans-serif',
-                            'fontSize': '14px',
-                            'color': COLORS['text'],
-                            'textAlign': 'center',
-                            'fontStyle': 'italic',
-                            'whiteSpace': 'pre-line'
-                        }
+                        className='location-status'
                     ),
                     # Hidden divs to store location data
                     dcc.Store(id='user-latitude', data=None),
                     dcc.Store(id='user-day', data=None),
-                ], style={
-                    'padding': '20px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
-                    'marginBottom': '20px'
-                }),
+                ], className='location-section'),
             ], className='content-section'),
             
             # Controls section
             html.Div([
                 html.Div([
-                    html.Label("Latitude (degrees)", 
-                              style={
-                                  'fontFamily': 'Roboto, sans-serif',
-                                  'fontSize': '16px',
-                                  'color': COLORS['text'],
-                                  'marginBottom': '10px',
-                                  'display': 'block'
-                              }),
+                    html.Label("Latitude (degrees)", className='control-label'),
                     dcc.Slider(
                         id='latitude-slider',
                         min=-90,
@@ -93,23 +46,10 @@ def create_layout():
                         step=1,
                         className='custom-slider'
                     ),
-                ], style={
-                    'marginBottom': '30px',
-                    'padding': '20px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
-                }),
+                ], className='control-section'),
                 
                 html.Div([
-                    html.Label("Time of Year", 
-                              style={
-                                  'fontFamily': 'Roboto, sans-serif',
-                                  'fontSize': '16px',
-                                  'color': COLORS['text'],
-                                  'marginBottom': '10px',
-                                  'display': 'block'
-                              }),
+                    html.Label("Time of Year", className='control-label'),
                     dcc.Slider(
                         id='day-slider',
                         min=1,
@@ -119,65 +59,26 @@ def create_layout():
                         step=1,
                         className='custom-slider'
                     ),
-                    html.Div(id='declination-info', 
-                            style={
-                                'fontFamily': 'Roboto, sans-serif',
-                                'fontSize': '14px',
-                                'color': COLORS['text'],
-                                'marginTop': '10px',
-                                'textAlign': 'center',
-                                'fontStyle': 'italic'
-                            }),
-                ], style={
-                    'padding': '20px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
-                }),
+                    html.Div(id='declination-info', className='declination-info'),
+                ], className='control-section'),
             ], className='content-section'),
             
             # Plots section
             html.Div([
                 html.Div([
                     dcc.Graph(id='time-series-plot'),
-                ], style={
-                    'padding': '10px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
-                    'marginBottom': '20px'
-                }),
+                ], className='plot-container'),
                 
                 html.Div([
                     dcc.Graph(id='polar-plot'),
-                ], style={
-                    'padding': '10px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
-                }),
+                ], className='plot-container'),
             ], className='content-section'),
             
             # Explanation section
             html.Div([
                 html.Div([
                     dcc.Markdown(id='explanation-content', mathjax=True)
-                ], style={
-                    'padding': '30px',
-                    'backgroundColor': 'white',
-                    'borderRadius': '10px',
-                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
-                    'fontFamily': 'Roboto, sans-serif',
-                    'fontSize': '16px',
-                    'color': COLORS['text'],
-                    'lineHeight': '1.6'
-                }),
-            ], className='content-section', style={
-                'marginTop': '40px',
-                'marginBottom': '40px'
-            })
-        ], className='main-container', style={
-            'backgroundColor': COLORS['background'],
-            'minHeight': '100vh'
-        })
+                ], className='explanation-container'),
+            ], className='content-section explanation-section')
+        ], className='main-container')
     ], style={'fontFamily': 'Roboto, sans-serif'}) 
