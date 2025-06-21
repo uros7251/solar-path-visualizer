@@ -16,8 +16,8 @@ The unit vectors of the local coordinate system can be expressed as:
 
 $$\begin{align*}
 \hat{r} &= \cos{\theta}\sin{\phi} \hat{x} + \cos{\theta}\cos{\phi} \hat{y} + \sin{\theta} \hat{z} \\
-\hat{\theta} &= \frac{\partial\hat{r}}{\partial\theta} \\
-\hat{\phi} &= \frac{\partial\hat{r}}{\partial\phi}
+\hat{\theta} &= \frac{1}{r}\frac{\partial\vec{r}}{\partial\theta} = \frac{\partial\hat{r}}{\partial\theta} \\
+\hat{\phi} &= \frac{1}{r\cos{\theta}}\frac{\partial\vec{r}}{\partial\phi} = \frac{1}{\cos{\theta}} \frac{\partial\hat{r}}{\partial\phi}
 \end{align*}$$
 
 The Sun's coordinates in the local coordinate system are then:
@@ -25,7 +25,7 @@ The Sun's coordinates in the local coordinate system are then:
 $$\begin{align*}
 \hat{s}\cdot \hat{r} &= \cos{\alpha}\cos{\theta}\cos{\phi} + \sin{\alpha}\sin{\theta} \\
 \hat{s}\cdot \hat{\theta} &= \hat{s}\cdot \frac{\partial\hat{r}}{\partial\theta} = \frac{\partial}{\partial\theta}(\hat{r}\cdot \hat{s}) \\ &= -\cos{\alpha}\sin{\theta}\cos{\phi} + \sin{\alpha}\cos{\theta} \\
-\hat{s}\cdot \hat{\phi} &= \hat{s}\cdot \frac{\partial\hat{r}}{\partial\phi} = \frac{\partial }{\partial\phi} \frac{\partial}{\partial\phi}(\hat{r}\cdot \hat{s}) \\ &= -\cos{\alpha}\cos{\theta}\sin{\phi}
+\hat{s}\cdot \hat{\phi} &= \hat{s}\cdot \frac{1}{\cos{\theta}}\frac{\partial\hat{r}}{\partial\phi} = \frac{1}{\cos{\theta}} \frac{\partial}{\partial\phi}(\hat{r}\cdot \hat{s}) \\ &= -\cos{\alpha}\sin{\phi}
 \end{align*}$$
 
 Altitude and azimuth can be expressed as:
