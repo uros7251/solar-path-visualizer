@@ -10,6 +10,7 @@ An interactive web application that visualizes the sun's movement across the sky
 - Adjustable latitude (-90° to 90°)
 - Day of year selection with month markers
 - Real-time solar declination display
+- Automatic location and date detection using browser geolocation
 
 ## Installation
 
@@ -39,6 +40,16 @@ python app.py
 
 Then open your browser and navigate to `http://127.0.0.1:8050/`
 
+### Location Detection Feature
+
+1. Click the "Get Current Date & Location Info" button
+2. Allow location access when prompted by your browser
+3. The application will automatically:
+   - Detect your current latitude
+   - Get the current date
+   - Update both latitude and day-of-year sliders
+   - Show the solar path for your exact location and current date
+
 ## Project Structure
 
 ```
@@ -51,6 +62,10 @@ solar-path-visualizer/
 ├── plots/             # Plotting modules
 │   ├── time_series.py # Time series plot
 │   └── polar.py       # Polar projection plot
+├── templates/         # HTML templates
+│   └── index.html     # Custom HTML template
+├── assets/            # Static assets
+│   └── custom.css     # Custom CSS styles
 ├── requirements.txt    # Project dependencies
 └── README.md          # This file
 ```
@@ -60,6 +75,13 @@ solar-path-visualizer/
 - dash
 - plotly
 - numpy
+
+## Browser Compatibility
+
+The location detection feature requires a modern browser with geolocation support. The application will gracefully handle cases where:
+- Geolocation is not supported
+- Location access is denied
+- Network connectivity issues occur
 
 ## License
 

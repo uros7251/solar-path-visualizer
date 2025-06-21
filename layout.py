@@ -22,6 +22,61 @@ def create_layout():
                         'marginTop': '20px'
                     }),
             
+            # Location detection section
+            html.Div([
+                html.Div([
+                    html.H3("📍 Get My Location", 
+                            style={
+                                'fontFamily': 'Roboto, sans-serif',
+                                'fontSize': '18px',
+                                'color': COLORS['text'],
+                                'marginBottom': '15px',
+                                'textAlign': 'center'
+                            }),
+                    html.Button(
+                        "Get Current Date & Location Info",
+                        id='location-button',
+                        style={
+                            'backgroundColor': COLORS['primary'],
+                            'color': 'white',
+                            'border': 'none',
+                            'padding': '12px 24px',
+                            'borderRadius': '8px',
+                            'fontFamily': 'Roboto, sans-serif',
+                            'fontSize': '16px',
+                            'cursor': 'pointer',
+                            'width': '100%',
+                            'marginBottom': '15px',
+                            'transition': 'all 0.3s ease'
+                        }
+                    ),
+                    html.Div(
+                        id='location-status',
+                        style={
+                            'fontFamily': 'Roboto, sans-serif',
+                            'fontSize': '14px',
+                            'color': COLORS['text'],
+                            'textAlign': 'center',
+                            'fontStyle': 'italic',
+                            'whiteSpace': 'pre-line'
+                        }
+                    ),
+                    # Hidden divs to store location data
+                    dcc.Store(id='user-latitude', data=None),
+                    dcc.Store(id='user-day', data=None),
+                ], style={
+                    'padding': '20px',
+                    'backgroundColor': 'white',
+                    'borderRadius': '10px',
+                    'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
+                    'marginBottom': '20px'
+                }),
+            ], style={
+                'width': '1000px',
+                'margin': '0 auto',
+                'padding': '20px'
+            }),
+            
             # Controls section with uniform width
             html.Div([
                 html.Div([

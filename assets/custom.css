@@ -1,0 +1,41 @@
+/* Custom styles for the solar path visualizer */
+
+/* Location button hover effects */
+#location-button:hover {
+    background-color: #2980b9 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+#location-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Custom slider styling */
+.custom-slider .rc-slider-track {
+    background-color: #3498DB;
+}
+
+.custom-slider .rc-slider-handle {
+    border-color: #3498DB;
+    background-color: #3498DB;
+}
+
+.custom-slider .rc-slider-handle:hover {
+    border-color: #2980b9;
+    background-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* Additional styling for better visual consistency */
+.dash-graph {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.2s ease;
+} 
