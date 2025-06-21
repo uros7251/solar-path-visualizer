@@ -71,13 +71,9 @@ def create_layout():
                     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)',
                     'marginBottom': '20px'
                 }),
-            ], style={
-                'width': '1000px',
-                'margin': '0 auto',
-                'padding': '20px'
-            }),
+            ], className='content-section'),
             
-            # Controls section with uniform width
+            # Controls section
             html.Div([
                 html.Div([
                     html.Label("Latitude (degrees)", 
@@ -138,13 +134,9 @@ def create_layout():
                     'borderRadius': '10px',
                     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
                 }),
-            ], style={
-                'width': '1000px',
-                'margin': '0 auto',
-                'padding': '20px'
-            }),
+            ], className='content-section'),
             
-            # Plots section with uniform width and vertical stacking
+            # Plots section
             html.Div([
                 html.Div([
                     dcc.Graph(id='time-series-plot'),
@@ -164,13 +156,9 @@ def create_layout():
                     'borderRadius': '10px',
                     'boxShadow': '0 2px 4px rgba(0,0,0,0.1)'
                 }),
-            ], style={
-                'width': '1000px',
-                'margin': '0 auto',
-                'padding': '20px'
-            }),
+            ], className='content-section'),
             
-            # Explanation section with uniform width
+            # Explanation section
             html.Div([
                 html.Div([
                     dcc.Markdown(id='explanation-content', mathjax=True)
@@ -184,16 +172,12 @@ def create_layout():
                     'color': COLORS['text'],
                     'lineHeight': '1.6'
                 }),
-            ], style={
-                'width': '1000px',
-                'margin': '0 auto',
+            ], className='content-section', style={
                 'marginTop': '40px',
-                'marginBottom': '40px',
-                'padding': '20px'
+                'marginBottom': '40px'
             })
-        ], style={
+        ], className='main-container', style={
             'backgroundColor': COLORS['background'],
-            'minHeight': '100vh',
-            'padding': '20px'
+            'minHeight': '100vh'
         })
     ], style={'fontFamily': 'Roboto, sans-serif'}) 

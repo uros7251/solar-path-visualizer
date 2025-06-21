@@ -38,4 +38,126 @@
 /* Smooth transitions for all interactive elements */
 * {
     transition: all 0.2s ease;
+}
+
+/* Responsive design */
+.main-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1200px) {
+    .main-container {
+        max-width: 95%;
+        padding: 15px;
+    }
+    
+    .content-section {
+        max-width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+    
+    .content-section {
+        padding: 10px;
+    }
+    
+    /* Adjust text sizes for mobile */
+    h1 {
+        font-size: 24px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    h3 {
+        font-size: 16px !important;
+    }
+    
+    /* Make sliders more touch-friendly on mobile */
+    .custom-slider .rc-slider-handle {
+        width: 20px !important;
+        height: 20px !important;
+        margin-top: -8px !important;
+    }
+    
+    /* Adjust button padding for mobile */
+    #location-button {
+        padding: 15px 20px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Improve graph responsiveness on mobile */
+    .dash-graph {
+        height: 300px !important;
+    }
+    
+    /* Adjust padding for mobile */
+    .content-section > div {
+        padding: 15px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 5px;
+    }
+    
+    .content-section {
+        padding: 5px;
+    }
+    
+    h1 {
+        font-size: 20px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    /* Stack elements vertically on very small screens */
+    .controls-container {
+        flex-direction: column;
+    }
+    
+    /* Further reduce graph height on very small screens */
+    .dash-graph {
+        height: 250px !important;
+    }
+    
+    /* Reduce padding on very small screens */
+    .content-section > div {
+        padding: 10px !important;
+    }
+    
+    /* Make sliders even more touch-friendly */
+    .custom-slider .rc-slider-handle {
+        width: 24px !important;
+        height: 24px !important;
+        margin-top: -10px !important;
+    }
+}
+
+/* Ensure graphs are responsive */
+.js-plotly-plot {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Improve slider responsiveness */
+.rc-slider {
+    width: 100% !important;
 } 
