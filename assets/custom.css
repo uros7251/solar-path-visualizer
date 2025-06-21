@@ -1,5 +1,21 @@
 /* Custom styles for the solar path visualizer */
 
+/* Disable Plotly hover animations */
+.js-plotly-plot .hoverlayer {
+    transition: none !important;
+    animation: none !important;
+}
+
+.js-plotly-plot .hoverlayer .hovertext {
+    transition: none !important;
+    animation: none !important;
+}
+
+.js-plotly-plot .hoverlayer .hoverlabel {
+    transition: none !important;
+    animation: none !important;
+}
+
 /* Location button hover effects */
 #location-button:hover {
     background-color: #2980b9 !important;
