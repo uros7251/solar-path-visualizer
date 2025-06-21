@@ -1,3 +1,6 @@
+# Version information
+VERSION = "1.0.0"
+
 # Define a modern color palette
 COLORS = {
     'background': '#F8F9FA',

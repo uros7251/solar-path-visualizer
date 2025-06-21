@@ -30,7 +30,32 @@ env/
 .vscode/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/ 

@@ -65,16 +65,20 @@ solar-path-visualizer/
 ├── templates/         # HTML templates
 │   └── index.html     # Custom HTML template
 ├── assets/            # Static assets
-│   └── custom.css     # Custom CSS styles
+│   ├── custom.css     # Custom CSS styles
+│   ├── geolocation.js # Location detection JavaScript
+│   └── plotly-resize.js # Plotly resize functionality
 ├── requirements.txt    # Project dependencies
 └── README.md          # This file
 ```
 
 ## Dependencies
 
-- dash
-- plotly
-- numpy
+- dash==2.14.2
+- plotly==5.18.0
+- numpy==1.26.3
+- matplotlib==3.10.3
+- dash-latex==0.1.0
 
 ## Browser Compatibility
 

@@ -25,5 +25,11 @@ register_callbacks(app)
 app.config.suppress_callback_exceptions = True
 app.enable_dev_tools(dev_tools_hot_reload=True)
 
+def main():
+    """Main function to run the solar path visualizer application."""
+    print("Starting Solar Path Visualizer...")
+    print("Open your browser and navigate to: http://127.0.0.1:8050/")
+    app.run_server(debug=True, host='127.0.0.1', port=8050)
+
 if __name__ == '__main__':
-    app.run_server(debug=True) 
+    main() 

@@ -7,34 +7,8 @@
         {%favicon%}
         {%css%}
         <link rel="stylesheet" href="/assets/custom.css">
-        <script>
-            // Force Plotly graphs to resize when window is resized
-            window.addEventListener('resize', function() {
-                // Trigger resize event for all Plotly graphs
-                if (window.Plotly) {
-                    const graphs = document.querySelectorAll('.js-plotly-plot');
-                    graphs.forEach(function(graph) {
-                        if (graph && graph._fullLayout) {
-                            Plotly.Plots.resize(graph);
-                        }
-                    });
-                }
-            });
-            
-            // Also resize graphs after a short delay when page loads
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    if (window.Plotly) {
-                        const graphs = document.querySelectorAll('.js-plotly-plot');
-                        graphs.forEach(function(graph) {
-                            if (graph && graph._fullLayout) {
-                                Plotly.Plots.resize(graph);
-                            }
-                        });
-                    }
-                }, 100);
-            });
-        </script>
+        <script src="/assets/geolocation.js"></script>
+        <script src="/assets/plotly-resize.js"></script>
     </head>
     <body>
         {%app_entry%}

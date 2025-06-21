@@ -2,6 +2,23 @@ import numpy as np
 from constants import SOLAR_CONSTANTS
 
 def calculate_sun_position(latitude, day_of_year):
+    """
+    Calculate the sun's position (altitude and azimuth) for a given latitude and day of year.
+    
+    This function uses astronomical formulas to compute the sun's path across the sky.
+    The calculations are based on the Earth's axial tilt and orbital position.
+    
+    Args:
+        latitude (float): Latitude in degrees (-90 to 90)
+        day_of_year (int): Day of the year (1 to 365)
+    
+    Returns:
+        tuple: (hour_angles_deg, altitude_deg, azimuth_deg, declination_deg)
+            - hour_angles_deg: Hour angles in degrees (-180 to 180)
+            - altitude_deg: Solar altitude in degrees (-90 to 90)
+            - azimuth_deg: Solar azimuth in degrees (0 to 360)
+            - declination_deg: Solar declination in degrees
+    """
     # Convert inputs to radians
     lat = np.radians(latitude)
     
@@ -38,15 +55,13 @@ def calculate_sun_position(latitude, day_of_year):
     return hour_angles_deg, altitude_deg, azimuth_deg, np.degrees(declination)
 
 def day_to_declination(day):
+    """
+    Convert day of year to solar declination.
+    
+    Args:
+        day (int): Day of the year (1 to 365)
+    
+    Returns:
+        float: Solar declination in degrees
+    """
     return 23.45 * np.sin(np.radians((360/365) * (day - 81)))
-
-def declination_to_day(declination):
-    # Convert declination to day of year
-    # We need to handle the fact that there are two days with the same declination
-    # We'll return the day closest to the current day
-    day = 81 + (365/(2*np.pi)) * np.arcsin(declination/23.45)
-    # Ensure the day is in the range [1, 365]
-    day = day % 365
-    if day < 1:
-        day += 365
-    return day 
